@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -37,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import com.example.movieappmad24.ui.theme.MovieAppMAD24Theme
 
 class MainActivity : ComponentActivity() {
+    private val movieList = mutableListOf<String>("Avatar", "Bvatar", "Cvatar")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -46,17 +49,17 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                 ) {
-                    Card {
-                        Image(painter = painterResource(id = R.drawable.movie_image), contentDescription = "placeholder_image")
-                    }
+                    MovieList(movies = movieList)
+//                    Card {
+//                        Image(painter = painterResource(id = R.drawable.movie_image), contentDescription = "placeholder_image")
+//                    }
                 }
             }
         }
     }
 
-    @Preview
     @Composable
-    fun MovieRow() {
+    fun MovieRowMy() {
         Column {
             Box {
                 Card {
@@ -71,9 +74,17 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    @Preview
     @Composable
-    fun MovieRowa() {
+    fun MovieList(movies: List<String>){
+        LazyColumn {
+            items(movies) {movie -> 
+                MovieRow(movie = movie)
+            }
+        }
+    }
+
+    @Composable
+    fun MovieRow(movie: String) {
         Card(
                 modifier = Modifier
                         .fillMaxWidth()
@@ -106,7 +117,7 @@ class MainActivity : ComponentActivity() {
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(text = "Avatar")
+                    Text(text = movie)
                     Icon(modifier = Modifier,
                             imageVector = Icons.Default.KeyboardArrowUp, contentDescription = "showDetails")
                 }
