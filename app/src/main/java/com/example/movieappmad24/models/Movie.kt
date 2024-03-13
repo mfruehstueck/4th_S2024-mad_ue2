@@ -10,7 +10,8 @@ data class Movie(
     val plot: String,
     val images: List<String>,
     val trailer: String,
-    val rating: String
+    val rating: String,
+    val inWatchlist: Boolean
 )
 
 fun getMovies(): List<Movie> {
@@ -31,7 +32,8 @@ fun getMovies(): List<Movie> {
                 "https://images-na.ssl-images-amazon.com/images/M/MV5BMTYxMDg1Nzk1MV5BMl5BanBnXkFtZTcwMDk0MTUzNA@@._V1_SX1500_CR0,0,1500,999_AL_.jpg"
             ),
             trailer = "trailer_placeholder",
-            rating = "7.9"
+            rating = "7.9",
+            inWatchlist = false
         ),
 
         Movie(
@@ -48,7 +50,8 @@ fun getMovies(): List<Movie> {
                 "https://images-na.ssl-images-amazon.com/images/M/MV5BMTc0MjQzOTEwMV5BMl5BanBnXkFtZTcwMzE2NTIyMw@@._V1_SX1777_CR0,0,1777,947_AL_.jpg"
             ),
             trailer = "trailer_placeholder",
-            rating = "7.7"
+            rating = "7.7",
+            inWatchlist = false
         ),
 
         Movie(
@@ -67,7 +70,8 @@ fun getMovies(): List<Movie> {
                 "https://images-na.ssl-images-amazon.com/images/M/MV5BMTc3MzQ3NjA5N15BMl5BanBnXkFtZTcwMzY5OTY3Nw@@._V1_SX1777_CR0,0,1777,999_AL_.jpg"
             ),
             trailer = "trailer_placeholder",
-            rating = "8.1"
+            rating = "8.1",
+            inWatchlist = false
         ),
 
         Movie(
@@ -86,7 +90,8 @@ fun getMovies(): List<Movie> {
                 "https://images-na.ssl-images-amazon.com/images/M/MV5BMTgzMTg4MDI0Ml5BMl5BanBnXkFtZTgwOTY0MzQ4MDE@._V1_SY1000_CR0,0,1553,1000_AL_.jpg"
             ),
             trailer = "trailer_placeholder",
-            rating = "8.2"
+            rating = "8.2",
+            inWatchlist = false
         ),
 
         Movie(
@@ -105,7 +110,8 @@ fun getMovies(): List<Movie> {
                 "https://images-na.ssl-images-amazon.com/images/M/MV5BNjYzNjE2NDk3N15BMl5BanBnXkFtZTgwNzEyODgxMzE@._V1_SX1500_CR0,0,1500,999_AL_.jpg"
             ),
             trailer = "trailer_placeholder",
-            rating = "8.6"
+            rating = "8.6",
+            inWatchlist = false
         ),
         Movie(
             id = "tt0944947",
@@ -123,7 +129,8 @@ fun getMovies(): List<Movie> {
                 "https://images-na.ssl-images-amazon.com/images/M/MV5BNTMyMTRjZWEtM2UxMS00ZjU5LWIxMTYtZDA5YmJhZmRjYTc4XkEyXkFqcGdeQXVyMjk3NTUyOTc@._V1_SX1777_CR0,0,1777,999_AL_.jpg"
             ),
             trailer = "trailer_placeholder",
-            rating = "9.5"
+            rating = "9.5",
+            inWatchlist = false
         ),
 
 
@@ -143,7 +150,8 @@ fun getMovies(): List<Movie> {
                 "https://images-na.ssl-images-amazon.com/images/M/MV5BMTcxOTQ3NTA5N15BMl5BanBnXkFtZTgwMzExMDUxODE@._V1_SY1000_SX1500_AL_.jpg"
             ),
             trailer = "trailer_placeholder",
-            rating = "9.5"
+            rating = "9.5",
+            inWatchlist = false
         ),
 
         Movie(
@@ -162,7 +170,8 @@ fun getMovies(): List<Movie> {
                 "https://images-na.ssl-images-amazon.com/images/M/MV5BMjA5MTE3MTgwMF5BMl5BanBnXkFtZTgwOTQxMjUzMDE@._V1_SX1500_CR0,0,1500,999_AL_.jpg"
             ),
             trailer = "trailer_placeholder",
-            rating = "9.5"
+            rating = "9.5",
+            inWatchlist = false
         ),
 
         Movie(
@@ -181,7 +190,8 @@ fun getMovies(): List<Movie> {
                 "https://images-na.ssl-images-amazon.com/images/M/MV5BMTU0NzQ0OTAwNl5BMl5BanBnXkFtZTgwMDAyMzA1OTE@._V1_SX1500_CR0,0,1500,999_AL_.jpg"
             ),
             trailer = "trailer_placeholder",
-            rating = "9.5"
+            rating = "9.5",
+            inWatchlist = false
         ),
 
         )
