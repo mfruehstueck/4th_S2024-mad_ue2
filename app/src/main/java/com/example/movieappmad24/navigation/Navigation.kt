@@ -48,7 +48,6 @@ fun Navigation(startup: Screens) {
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BaseNavigation(
     title: String,
@@ -57,24 +56,39 @@ fun BaseNavigation(
 ) {
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(title) }
-            )
+            SimpleTopAppBar(title = title)
         },
         bottomBar = {
-            NavigationBar {
-                NavigationBarItem(
-                    selected = true,
-                    onClick = { navController.navigate("${Screens.homescreen}") },
-                    icon = { Icon(Icons.Filled.Home, contentDescription = "") },
-                    label = { Text(text = "Home") })
-                NavigationBarItem(
-                    selected = false,
-                    onClick = { navController.navigate("${Screens.watchlistscreen}") },
-                    icon = { Icon(Icons.Filled.Star, contentDescription = "") },
-                    label = { Text(text = "Wishlist") })
-            }
+            SimpleBottomAppBar(navController = navController)
         },
         content = { innerPadding -> content(innerPadding) }
     )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SimpleTopAppBar(title: String) {
+    CenterAlignedTopAppBar(
+        title = { Text(title) }
+    )
+}
+
+@Composable
+fun SimpleBottomAppBar(navController: NavController) {
+    NavigationBar {
+        NavigationBarItem(
+            selected = true,
+            onClick = {
+                navController.navigate("${Screens.homescreen}")
+            },
+            icon = { Icon(Icons.Filled.Home, contentDescription = "") },
+            label = { Text(text = "Home") })
+        NavigationBarItem(
+            selected = false,
+            onClick = {
+                navController.navigate("${Screens.watchlistscreen}")
+            },
+            icon = { Icon(Icons.Filled.Star, contentDescription = "") },
+            label = { Text(text = "Watchlist") })
+    }
 }
