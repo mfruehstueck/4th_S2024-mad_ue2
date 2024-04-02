@@ -1,5 +1,9 @@
 package com.example.movieappmad24.models
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+
 data class Movie(
     val id: String,
     val title: String,
@@ -11,8 +15,10 @@ data class Movie(
     val images: List<String>,
     val trailer: String,
     val rating: String,
-    val inWatchlist: Boolean
-)
+    val initInWatchlist: Boolean = false
+) {
+    var inWatchlist by mutableStateOf(initInWatchlist)
+}
 
 fun getMovies(): List<Movie> {
     return listOf(
@@ -33,7 +39,6 @@ fun getMovies(): List<Movie> {
             ),
             trailer = "trailer_placeholder",
             rating = "7.9",
-            inWatchlist = false
         ),
 
         Movie(
@@ -51,7 +56,6 @@ fun getMovies(): List<Movie> {
             ),
             trailer = "trailer_placeholder",
             rating = "7.7",
-            inWatchlist = false
         ),
 
         Movie(
@@ -71,7 +75,6 @@ fun getMovies(): List<Movie> {
             ),
             trailer = "trailer_placeholder",
             rating = "8.1",
-            inWatchlist = false
         ),
 
         Movie(
@@ -91,7 +94,6 @@ fun getMovies(): List<Movie> {
             ),
             trailer = "trailer_placeholder",
             rating = "8.2",
-            inWatchlist = false
         ),
 
         Movie(
@@ -111,7 +113,6 @@ fun getMovies(): List<Movie> {
             ),
             trailer = "trailer_placeholder",
             rating = "8.6",
-            inWatchlist = false
         ),
         Movie(
             id = "tt0944947",
@@ -130,7 +131,6 @@ fun getMovies(): List<Movie> {
             ),
             trailer = "trailer_placeholder",
             rating = "9.5",
-            inWatchlist = false
         ),
 
 
@@ -151,7 +151,6 @@ fun getMovies(): List<Movie> {
             ),
             trailer = "trailer_placeholder",
             rating = "9.5",
-            inWatchlist = false
         ),
 
         Movie(
@@ -171,7 +170,6 @@ fun getMovies(): List<Movie> {
             ),
             trailer = "trailer_placeholder",
             rating = "9.5",
-            inWatchlist = false
         ),
 
         Movie(
@@ -191,7 +189,6 @@ fun getMovies(): List<Movie> {
             ),
             trailer = "trailer_placeholder",
             rating = "9.5",
-            inWatchlist = false
         ),
 
         )

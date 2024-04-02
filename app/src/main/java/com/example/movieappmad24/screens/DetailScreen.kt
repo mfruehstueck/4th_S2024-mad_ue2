@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -43,11 +44,11 @@ fun DetailScreen(navController: NavController, movieID: String?) {
             )
         },
         bottomBar = {},
-        content = {innerPadding ->
+        content = { innerPadding ->
             Text("This is movie ${currentMovie?.id}")
             if (currentMovie != null) {
                 Column (
-                    modifier = Modifier.consumeWindowInsets(innerPadding)
+                    modifier = Modifier.padding(innerPadding)
                 ){
                     MovieRow(movie = currentMovie)
                     LazyRow {

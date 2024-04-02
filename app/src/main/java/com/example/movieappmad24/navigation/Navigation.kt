@@ -12,6 +12,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -21,14 +22,16 @@ import androidx.navigation.navArgument
 import com.example.movieappmad24.RoutArguments
 import com.example.movieappmad24.Screens
 import com.example.movieappmad24.screens.WatchlistScreen
+import com.example.movieappmad24.viewmodel.MoviesViewModel
 
 @Composable
 fun Navigation(startup: Screens) {
     val navController = rememberNavController()
+    var moviesViewModel: MoviesViewModel = viewModel()
 
     NavHost(navController = navController, startDestination = "$startup") {
         composable(route = "${Screens.homescreen}") {
-            com.example.movieappmad24.screens.HomeScreen(navController)
+            com.example.movieappmad24.screens.HomeScreen(navController, moviesViewModel)
         }
         composable(
             "${Screens.detailscreen}/{${RoutArguments.movieID}}",
@@ -42,14 +45,14 @@ fun Navigation(startup: Screens) {
             )
         }
         composable("${Screens.watchlistscreen}") {
-            WatchlistScreen(navController = navController)
+            WatchlistScreen(navController = navController, moviesViewModel)
         }
     }
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun BaseNavigation(
+fun BaseScreen(
     title: String,
     content: @Composable (Any?) -> Unit = {},
     navController: NavController

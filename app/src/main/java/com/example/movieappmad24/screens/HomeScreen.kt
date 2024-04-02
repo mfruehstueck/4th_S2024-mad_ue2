@@ -21,12 +21,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ShapeDefaults
@@ -43,25 +43,29 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.movieappmad24.navigation.BaseNavigation
+import com.example.movieappmad24.navigation.BaseScreen
 import com.example.movieappmad24.R
 import com.example.movieappmad24.Screens
 import com.example.movieappmad24.models.Movie
 import com.example.movieappmad24.models.getMovies
+import com.example.movieappmad24.viewmodel.MoviesViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeScreen(navController: NavController) {
-    BaseNavigation(
+fun HomeScreen(navController: NavController, moviesViewModel: MoviesViewModel) {
+    val movieList = moviesViewModel.movielist
+
+    BaseScreen(
         title = "Movie App",
         content = { innerPadding ->
             MovieList(
-                movieList = getMovies(),
+                movieList = movieList,
                 navController = navController,
                 innerPadding = innerPadding as PaddingValues
             )
         },
-        navController = navController)
+        navController = navController
+    )
 }
 
 @Composable
@@ -97,6 +101,7 @@ fun MovieList(movieList: List<Movie>, navController: NavController, innerPadding
 @Composable
 fun MovieRow(movie: Movie, onItemClick: (String) -> Unit = {}) {
     var isExpanded by remember { mutableStateOf(false) }
+    var isWatchlisted by remember { mutableStateOf(false) }
 
     Card(
         modifier = Modifier
@@ -121,10 +126,10 @@ fun MovieRow(movie: Movie, onItemClick: (String) -> Unit = {}) {
                     placeholder = painterResource(R.drawable.movie_image)
                 )
 
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = { isWatchlisted = !isWatchlisted }) {
                     Icon(
                         modifier = Modifier.padding(8.dp),
-                        imageVector = Icons.Default.FavoriteBorder,
+                        imageVector = if(isWatchlisted) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                         contentDescription = "Like!"
                     )
                 }
