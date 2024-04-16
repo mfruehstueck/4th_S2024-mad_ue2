@@ -1,17 +1,21 @@
 package com.example.movieappmad24.navigation
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavType
@@ -27,7 +31,7 @@ import com.example.movieappmad24.viewmodel.MoviesViewModel
 @Composable
 fun Navigation(startup: Screens) {
     val navController = rememberNavController()
-    var moviesViewModel: MoviesViewModel = viewModel()
+    val moviesViewModel: MoviesViewModel = viewModel()
 
     NavHost(navController = navController, startDestination = "$startup") {
         composable(route = "${Screens.homescreen}") {
@@ -41,7 +45,8 @@ fun Navigation(startup: Screens) {
         ) { backStackEntry ->
             com.example.movieappmad24.screens.DetailScreen(
                 navController,
-                movieID = backStackEntry.arguments?.getString("${RoutArguments.movieID}")
+                movieID = backStackEntry.arguments?.getString("${RoutArguments.movieID}"),
+                moviesViewModel = moviesViewModel
             )
         }
         composable("${Screens.watchlistscreen}") {
@@ -59,7 +64,7 @@ fun BaseScreen(
 ) {
     Scaffold(
         topBar = {
-            SimpleTopAppBar(title = title)
+            SimpleTopAppBar(title = title, navController = navController)
         },
         bottomBar = {
             SimpleBottomAppBar(navController = navController)
@@ -70,9 +75,19 @@ fun BaseScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SimpleTopAppBar(title: String) {
+fun SimpleTopAppBar(title: String, navController: NavController) {
     CenterAlignedTopAppBar(
-        title = { Text(title) }
+        title = { Text(title) },
+        navigationIcon = {
+            IconButton(
+                onClick = { navController.popBackStack() }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = "Return"
+                )
+            }
+        }
     )
 }
 

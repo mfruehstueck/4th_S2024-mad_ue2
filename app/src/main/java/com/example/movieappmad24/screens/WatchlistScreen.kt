@@ -11,7 +11,6 @@ import com.example.movieappmad24.navigation.BaseScreen
 import com.example.movieappmad24.viewmodel.MoviesViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WatchlistScreen(navController: NavController, moviesViewModel: MoviesViewModel) {
     val watchlistMovies = moviesViewModel.watchlist
@@ -22,6 +21,7 @@ fun WatchlistScreen(navController: NavController, moviesViewModel: MoviesViewMod
             MovieList(
                 movieList = watchlistMovies,
                 navController = navController,
+                moviesViewModel = moviesViewModel,
                 innerPadding = innerPadding as PaddingValues
             )
         },

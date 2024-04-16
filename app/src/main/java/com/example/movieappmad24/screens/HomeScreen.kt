@@ -41,6 +41,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Lifecycling
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.movieappmad24.navigation.BaseScreen
@@ -61,6 +63,7 @@ fun HomeScreen(navController: NavController, moviesViewModel: MoviesViewModel) {
             MovieList(
                 movieList = movieList,
                 navController = navController,
+                moviesViewModel = moviesViewModel,
                 innerPadding = innerPadding as PaddingValues
             )
         },
@@ -83,15 +86,19 @@ fun MovieDetails(movie: Movie) {
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun MovieList(movieList: List<Movie>, navController: NavController, innerPadding: PaddingValues) {
+fun MovieList(
+    movieList: List<Movie>,
+    navController: NavController,
+    moviesViewModel: MoviesViewModel,
+    innerPadding: PaddingValues
+) {
     LazyColumn(
         modifier = Modifier.consumeWindowInsets(innerPadding),
         contentPadding = innerPadding
     ) {
         items(movieList) { movie ->
-            MovieRow(movie) { movieID ->
+            MovieRow(movie, moviesViewModel, navController) { movieID ->
                 navController.navigate("${Screens.detailscreen}/$movieID")
-                //movieID -> Log.d("MovieList", "My callback value: $movieID")
             }
         }
     }
@@ -99,9 +106,16 @@ fun MovieList(movieList: List<Movie>, navController: NavController, innerPadding
 
 @ExperimentalAnimationApi
 @Composable
-fun MovieRow(movie: Movie, onItemClick: (String) -> Unit = {}) {
+fun MovieRow(
+    movie: Movie,
+    moviesViewModel: MoviesViewModel,
+    navController: NavController,
+    onItemClick: (String) -> Unit = {}
+) {
     var isExpanded by remember { mutableStateOf(false) }
     var isWatchlisted by remember { mutableStateOf(false) }
+
+    isWatchlisted = movie.inWatchlist
 
     Card(
         modifier = Modifier
@@ -126,10 +140,15 @@ fun MovieRow(movie: Movie, onItemClick: (String) -> Unit = {}) {
                     placeholder = painterResource(R.drawable.movie_image)
                 )
 
-                IconButton(onClick = { isWatchlisted = !isWatchlisted }) {
+                IconButton(onClick = {
+                    isWatchlisted = moviesViewModel.toggleWatchlist(movie)
+                    if (navController.currentDestination?.route == Screens.watchlistscreen.toString()) {
+                        navController.navigate("${Screens.watchlistscreen}")
+                    }
+                }) {
                     Icon(
                         modifier = Modifier.padding(8.dp),
-                        imageVector = if(isWatchlisted) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                        imageVector = if (isWatchlisted) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                         contentDescription = "Like!"
                     )
                 }

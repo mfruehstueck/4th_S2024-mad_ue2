@@ -18,12 +18,13 @@ import coil.compose.AsyncImage
 import com.example.movieappmad24.R
 import com.example.movieappmad24.models.getMovies
 import com.example.movieappmad24.navigation.BaseScreen
+import com.example.movieappmad24.viewmodel.MoviesViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun DetailScreen(navController: NavController, movieID: String?) {
-    val currentMovie = getMovies().find { movie -> movie.id == movieID }
+fun DetailScreen(navController: NavController, movieID: String?, moviesViewModel: MoviesViewModel) {
+    val currentMovie = movieID?.let { moviesViewModel.getMovieByID(it) }
 
     currentMovie?.let {
         BaseScreen(title = it.title,
@@ -33,7 +34,7 @@ fun DetailScreen(navController: NavController, movieID: String?) {
                 Column(
                     modifier = Modifier.padding(innerPadding as PaddingValues)
                 ) {
-                    MovieRow(movie = currentMovie)
+                    MovieRow(movie = currentMovie, moviesViewModel = moviesViewModel, navController)
                     LazyRow {
                         items(currentMovie.images) { image ->
                             AsyncImage(
@@ -48,41 +49,4 @@ fun DetailScreen(navController: NavController, movieID: String?) {
             }
         )
     }
-
-//    Scaffold(
-//        topBar = {
-//            CenterAlignedTopAppBar(
-//                title = { Text("${currentMovie?.title}") },
-//                navigationIcon = {
-//                    IconButton(onClick = { navController.navigateUp() }) {
-//                        Icon(
-//                            imageVector = Icons.Filled.ArrowBack,
-//                            contentDescription = "Back"
-//                        )
-//                    }
-//                }
-//            )
-//        },
-//        bottomBar = {},
-//        content = { innerPadding ->
-//            Text("This is movie ${currentMovie?.id}")
-//            if (currentMovie != null) {
-//                Column(
-//                    modifier = Modifier.padding(innerPadding)
-//                ) {
-//                    MovieRow(movie = currentMovie)
-//                    LazyRow {
-//                        items(currentMovie.images) { image ->
-//                            AsyncImage(
-//                                model = image,
-//                                contentScale = ContentScale.Crop,
-//                                contentDescription = null,
-//                                placeholder = painterResource(R.drawable.movie_image)
-//                            )
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    )
 }
