@@ -2,11 +2,8 @@ package com.example.movieappmad24.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
-import com.example.movieappmad24.models.getMovies
 import com.example.movieappmad24.navigation.BaseScreen
 import com.example.movieappmad24.viewmodel.MoviesViewModel
 

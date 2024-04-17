@@ -1,6 +1,12 @@
 plugins {
+    // before exercise 5
+    //id("com.android.application")
+    //id("org.jetbrains.kotlin.android")
+
+    // exercise 5
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
 }
 
 kotlin {
@@ -44,7 +50,11 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        // before exercise 5
+        //kotlinCompilerExtensionVersion = "1.5.1"
+
+        // exercise 5
+        kotlinCompilerExtensionVersion = "1.5.7"
     }
     packaging {
         resources {
@@ -90,7 +100,17 @@ dependencies {
     //noinspection GradleDependency
     implementation("androidx.media3:media3-exoplayer:$media3_version")
     //noinspection GradleDependency
-    implementation ("androidx.media3:media3-exoplayer-dash:$media3_version")
+    implementation("androidx.media3:media3-exoplayer-dash:$media3_version")
     //noinspection GradleDependency
-    implementation ("androidx.media3:media3-ui:$media3_version")
+    implementation("androidx.media3:media3-ui:$media3_version")
+
+    // room
+    val room_version = "2.6.1"
+
+    // room dependencies
+    implementation("androidx.room:room-runtime:$room_version")
+    // To use Kotlin Symbol Processing (KSP)
+    ksp("androidx.room:room-compiler:$room_version")
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$room_version")
 }

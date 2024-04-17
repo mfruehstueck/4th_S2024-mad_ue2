@@ -2,10 +2,10 @@ package com.example.movieappmad24.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.example.movieappmad24.models.Movie
-import com.example.movieappmad24.models.getMovies
+import com.example.movieappmad24.models.getAll
 
 class MoviesViewModel : ViewModel() {
-    private val _movielist = getMovies().toMutableList()
+    private val _movielist = getAll().toMutableList()
     private val _watchlist = _movielist.filter { movie -> movie.inWatchlist }.toMutableList()
 
     val movielist: List<Movie> = _movielist
@@ -23,7 +23,7 @@ class MoviesViewModel : ViewModel() {
 
 
     fun getisFavorite(movie: Movie): Boolean {
-        return movie.inWatchlist;
+        return movie.inWatchlist
     }
 
 
