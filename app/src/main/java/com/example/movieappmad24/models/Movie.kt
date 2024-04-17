@@ -13,7 +13,7 @@ data class Movie(
     val actors: String,
     val plot: String,
     val images: List<String>,
-    val trailer: String,
+    val trailer: String = "trailer_placeholder",
     val rating: String,
     val initInWatchlist: Boolean = false
 ) {

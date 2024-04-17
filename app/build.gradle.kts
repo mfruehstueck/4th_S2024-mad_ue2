@@ -54,9 +54,11 @@ android {
 }
 
 dependencies {
-
+    //noinspection GradleDependency
     implementation("androidx.core:core-ktx:1.10.1")
+    //noinspection GradleDependency
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    //noinspection GradleDependency
     implementation("androidx.activity:activity-compose:1.7.0")
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation("androidx.compose.ui:ui")
@@ -73,12 +75,22 @@ dependencies {
 
     implementation("io.coil-kt:coil-compose:2.6.0")
 
-    //navigation
+    // navigation
     val nav_version = "2.7.7"
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
-    //modelView
+    // modelView
     val mv_version = "2.7.0"
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$mv_version")
 
+
+    val media3_version = "1.2.1"
+
+    // exoPlayer
+    //noinspection GradleDependency
+    implementation("androidx.media3:media3-exoplayer:$media3_version")
+    //noinspection GradleDependency
+    implementation ("androidx.media3:media3-exoplayer-dash:$media3_version")
+    //noinspection GradleDependency
+    implementation ("androidx.media3:media3-ui:$media3_version")
 }
